@@ -1,0 +1,28 @@
+[
+  {
+    "author": "Josh Spence",
+    "ingredients": [
+      "chickpeas",
+      "soy sauce"
+    ],
+    "recipeSteps": [
+      "heat chickpeas in pan",
+      "add soy sauce and fry"
+    ],
+    "id": 1,
+    "date_created": "1997-11-02"
+  },
+  {
+    "author": "Josh Spence",
+    "ingredients": [
+      "chickpeas",
+      "soy sauce"
+    ],
+    "recipeSteps": [
+      "heat chickpeas in pan",
+      "add soy sauce and fry"
+    ],
+    "id": 2,
+    "date_created": "1997-11-02"
+  }
+]
