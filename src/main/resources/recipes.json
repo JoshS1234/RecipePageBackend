@@ -9,6 +9,9 @@
       "heat chickpeas in pan",
       "add soy sauce and fry"
     ],
+    "scores": [
+      1,3,5
+    ],
     "id": 1,
     "date_created": "1997-11-02"
   },
@@ -21,6 +24,9 @@
     "recipeSteps": [
       "heat chickpeas in pan",
       "add soy sauce and fry"
+    ],
+    "scores": [
+      5,3,4
     ],
     "id": 2,
     "date_created": "1997-11-02"

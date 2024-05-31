@@ -19,14 +19,22 @@ public class Recipe {
     Recipe() {
     }
 
-    Recipe(Long id, List<String> ingredients, List<String> recipeSteps, List<Integer> scores,String author, int rating,  LocalDate dateCreated) {
+    Recipe(Long id, List<String> ingredients, List<String> recipeSteps, List<Integer> scores, String author,  LocalDate dateCreated) {
         this.id=id;
         this.ingredients=ingredients;
         this.recipeSteps=recipeSteps;
         this.author=author;
-        this.rating=rating;
         this.scores = scores;
         this.dateCreated=dateCreated;
+        this.rating = 0;
+    }
+
+    public List<Integer> getScores() {
+        return scores;
+    }
+
+    public void setScores(List<Integer> scores) {
+        this.scores = scores;
     }
 
     public Long getId() {

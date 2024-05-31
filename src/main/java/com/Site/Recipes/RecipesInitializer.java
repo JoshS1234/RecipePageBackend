@@ -43,13 +43,13 @@ public class RecipesInitializer {
         recipeSteps.add("Cook the chickpeas");
 
         List<Integer> scores = new ArrayList<>();
-        scores.add(3);
-        scores.add(5);
-        scores.add(2);
+        scores.add((Integer) 3);
+        scores.add((Integer) 5);
+        scores.add((Integer) 2);
 
 
-        Recipe recipe1 = new Recipe(1L, ingredients, recipeSteps, scores, "Josh", 5, LocalDate.now());
-        Recipe recipe2 = new Recipe(2L, ingredients, recipeSteps, scores , "Josh", 5, LocalDate.now());
+        Recipe recipe1 = new Recipe(1L, ingredients, recipeSteps, scores, "Josh", LocalDate.now());
+        Recipe recipe2 = new Recipe(2L, ingredients, recipeSteps, scores , "Josh", LocalDate.now());
         recipeRepository.addRecipe(recipe1);
         recipeRepository.addRecipe(recipe2);
     }
