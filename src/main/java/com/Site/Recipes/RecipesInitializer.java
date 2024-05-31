@@ -1,22 +1,14 @@
 package com.Site.Recipes;
-
 import jakarta.annotation.PostConstruct;
-import jakarta.annotation.Resource;
-import org.apache.tomcat.util.json.JSONParser;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Component;
-
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.io.*;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 @Component
@@ -24,41 +16,36 @@ public class RecipesInitializer {
     private final RecipeRepository recipeRepository;
 
     @Value("classpath:recipes.json")
-    private File resourceFile;
+    private Resource resourceFile;
 
     @Autowired
     public RecipesInitializer(RecipeRepository recipeRepository) {
         this.recipeRepository = recipeRepository;
     }
 
-
     @PostConstruct
     public void init() {
-        List<String> ingredients = new ArrayList<>();
-        ingredients.add("Chickpeas");
-        ingredients.add("Soy sauce");
+        JSONParser jsonParser = new JSONParser();
+        try (FileReader reader = new FileReader(resourceFile.getFile())) {
+            Object obj = jsonParser.parse(reader);
 
+            JSONArray jsonArray = (JSONArray) obj;
 
-        List<String> recipeSteps = new ArrayList<>();
-        recipeSteps.add("Cook the chickpeas");
+            for (Object greeting : jsonArray) {
+                JSONObject recipeJSON = (JSONObject) greeting;
 
-        List<Integer> scores = new ArrayList<>();
-        scores.add((Integer) 3);
-        scores.add((Integer) 5);
-        scores.add((Integer) 2);
+                long id = (long) recipeJSON.get("id");
+                List<String> ingredients = (List<String>) recipeJSON.get("ingredients");
+                List<String> recipeSteps = (List<String>) recipeJSON.get("recipeSteps");
+                List<Integer> scores = (List<Integer>) recipeJSON.get("scores");
+                String author = (String) recipeJSON.get("author");
+                LocalDate dateCreated = LocalDate.parse((String) recipeJSON.get("date_created"));
 
+                recipeRepository.addRecipe(new Recipe(id, ingredients, recipeSteps, scores, author, dateCreated));
+            }
 
-        Recipe recipe1 = new Recipe(1L, ingredients, recipeSteps, scores, "Josh", LocalDate.now());
-        Recipe recipe2 = new Recipe(2L, ingredients, recipeSteps, scores , "Josh", LocalDate.now());
-        recipeRepository.addRecipe(recipe1);
-        recipeRepository.addRecipe(recipe2);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
-
-
 }
-
-
-
-
-
-

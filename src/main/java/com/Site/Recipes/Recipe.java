@@ -12,21 +12,21 @@ public class Recipe {
     List<String> ingredients = new ArrayList<String>();
     List<String> recipeSteps = new ArrayList<String>();
     String author;
-    int rating;
+    double rating;
     private LocalDate dateCreated = LocalDate.now();
     List<Integer> scores = new ArrayList<Integer>();
 
     Recipe() {
     }
 
-    Recipe(Long id, List<String> ingredients, List<String> recipeSteps, List<Integer> scores, String author,  LocalDate dateCreated) {
+    public Recipe(Long id, List<String> ingredients, List<String> recipeSteps, List<Integer> scores, String author, LocalDate dateCreated) {
         this.id=id;
         this.ingredients=ingredients;
         this.recipeSteps=recipeSteps;
         this.author=author;
         this.scores = scores;
         this.dateCreated=dateCreated;
-        this.rating = 0;
+        this.rating = calculateRating();
     }
 
     public List<Integer> getScores() {
@@ -83,5 +83,13 @@ public class Recipe {
 
     public void setDateCreated(LocalDate dateCreated) {
         this.dateCreated = dateCreated;
+    }
+
+    public double calculateRating() {
+        double total = 0;
+        for(int score : scores) {
+            total+=score;
+        }
+        return Math.round(total/scores.size());
     }
 }
