@@ -2,6 +2,7 @@ package com.Site.Recipes;
 
 import com.Site.Recipes.CustomExceptions.RecipeIdAlreadyExistsException;
 import com.Site.Recipes.CustomExceptions.RecipeNotFoundException;
+import com.Site.Recipes.RequestClasses.ScoreAddRequestBody;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -58,9 +59,24 @@ public class RecipesController {
 
 
     //Update
+    @PutMapping("/recipes/{id}")
+    public Recipe updateRecipe(@RequestBody Recipe recipeToUpdate, @PathVariable Long id) {
+        recipeToUpdate.setId(id);
+        return recipesService.updateRecipeById(recipeToUpdate, id);
+    }
+
+    @PutMapping("/recipes/rating/{id}")
+    public Recipe addRatingForRecipe(@RequestBody ScoreAddRequestBody requestBody, @PathVariable Long id) {
+        Integer newScore=requestBody.newScore;
+        return recipesService.addRatingForRecipe(newScore, id);
+    }
 
 
     //Delete
+    @DeleteMapping("/recipes/{id}")
+    public String deleteRecipeById(@PathVariable Long id) {
+        return recipesService.deleteRecipeById(id);
+    }
 
 
 }
