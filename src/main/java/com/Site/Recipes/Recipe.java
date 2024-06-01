@@ -26,7 +26,7 @@ public class Recipe {
         this.author=author;
         this.scores = scores;
         this.dateCreated=dateCreated;
-        this.rating = calculateRating();
+        this.rating = 0;
     }
 
     public List<Integer> getScores() {
@@ -69,7 +69,7 @@ public class Recipe {
         this.author = author;
     }
 
-    public int getRating() {
+    public double getRating() {
         return rating;
     }
 
@@ -87,7 +87,7 @@ public class Recipe {
 
     public double calculateRating() {
         double total = 0;
-        for(int score : scores) {
+        for(Integer score : scores) {
             total+=score;
         }
         return Math.round(total/scores.size());
