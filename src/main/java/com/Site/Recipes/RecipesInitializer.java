@@ -40,9 +40,10 @@ public class RecipesInitializer {
                 List<String> recipeSteps = (List<String>) recipeJSON.get("recipeSteps");
                 List<Integer> scores = (List<Integer>) recipeJSON.get("scores");
                 String author = (String) recipeJSON.get("author");
+                String imageUrl = (String) recipeJSON.get("imageUrl");
                 LocalDate dateCreated = LocalDate.parse((String) recipeJSON.get("date_created"));
 
-                recipeRepository.addRecipe(new Recipe(id, title, ingredients, recipeSteps, scores, author, dateCreated));
+                recipeRepository.addRecipe(new Recipe(id, title, ingredients, recipeSteps, scores, author, imageUrl,  dateCreated));
             }
 
         } catch (Exception e) {

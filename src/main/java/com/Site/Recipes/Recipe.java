@@ -13,6 +13,7 @@ public class Recipe {
     List<Ingredient> ingredients = new ArrayList<Ingredient>();
     List<String> recipeSteps = new ArrayList<String>();
     String author;
+    String imageUrl;
     double rating;
     private LocalDate dateCreated = LocalDate.now();
     List<Integer> scores = new ArrayList<Integer>();
@@ -20,15 +21,24 @@ public class Recipe {
     Recipe() {
     }
 
-    public Recipe(Long id, String title, List<Ingredient> ingredients, List<String> recipeSteps, List<Integer> scores, String author, LocalDate dateCreated) {
+    public Recipe(Long id, String title, List<Ingredient> ingredients, List<String> recipeSteps, List<Integer> scores, String author, String imageUrl, LocalDate dateCreated) {
         this.id=id;
         this.title=title;
         this.ingredients=ingredients;
         this.recipeSteps=recipeSteps;
         this.author=author;
         this.scores = scores;
+        this.imageUrl = imageUrl;
         this.dateCreated=dateCreated;
         this.rating = 0;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
     public String getTitle() {
