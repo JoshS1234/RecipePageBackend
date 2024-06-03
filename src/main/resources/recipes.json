@@ -1,9 +1,10 @@
 [
   {
-    "author": "Josh Spence",
+    "title": "Satay chickpeas 1",
+    "author": "Josh Spence 1",
     "ingredients": [
-      "chickpeas",
-      "soy sauce"
+      {"name":  "Canned Chickpeas", "amount":  "1 400ml can"},
+      {"name":"soy sauce", "amount": "1 tbsp" }
     ],
     "recipeSteps": [
       "heat chickpeas in pan",
@@ -16,10 +17,11 @@
     "date_created": "1997-11-02"
   },
   {
-    "author": "Josh Spence",
+    "title": "Satay chickpeas 2",
+    "author": "Josh Spence 2",
     "ingredients": [
-      "chickpeas",
-      "soy saaaaaaaaaauce"
+      {"name":  "Canned Chickpeas", "amount":  "1 400ml can"},
+      {"name":"soy saaaaaaaaauce", "amount": "1 tbsp" }
     ],
     "recipeSteps": [
       "heat chickpeas in pan",

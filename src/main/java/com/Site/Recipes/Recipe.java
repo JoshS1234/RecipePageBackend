@@ -9,7 +9,8 @@ import java.util.Random;
 
 public class Recipe {
     Long id =  new Random().nextLong();
-    List<String> ingredients = new ArrayList<String>();
+    String title;
+    List<Ingredient> ingredients = new ArrayList<Ingredient>();
     List<String> recipeSteps = new ArrayList<String>();
     String author;
     double rating;
@@ -19,14 +20,27 @@ public class Recipe {
     Recipe() {
     }
 
-    public Recipe(Long id, List<String> ingredients, List<String> recipeSteps, List<Integer> scores, String author, LocalDate dateCreated) {
+    public Recipe(Long id, String title, List<Ingredient> ingredients, List<String> recipeSteps, List<Integer> scores, String author, LocalDate dateCreated) {
         this.id=id;
+        this.title=title;
         this.ingredients=ingredients;
         this.recipeSteps=recipeSteps;
         this.author=author;
         this.scores = scores;
         this.dateCreated=dateCreated;
         this.rating = 0;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setRating(double rating) {
+        this.rating = rating;
     }
 
     public List<Integer> getScores() {
@@ -45,11 +59,11 @@ public class Recipe {
         this.id = id;
     }
 
-    public List<String> getIngredients() {
+    public List<Ingredient> getIngredients() {
         return ingredients;
     }
 
-    public void setIngredients(List<String> ingredients) {
+    public void setIngredients(List<Ingredient> ingredients) {
         this.ingredients = ingredients;
     }
 

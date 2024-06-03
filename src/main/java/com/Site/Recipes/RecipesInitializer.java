@@ -35,13 +35,14 @@ public class RecipesInitializer {
                 JSONObject recipeJSON = (JSONObject) greeting;
 
                 long id = (long) recipeJSON.get("id");
-                List<String> ingredients = (List<String>) recipeJSON.get("ingredients");
+                String title = (String) recipeJSON.get("title");
+                List<Ingredient> ingredients = (List<Ingredient>) recipeJSON.get("ingredients");
                 List<String> recipeSteps = (List<String>) recipeJSON.get("recipeSteps");
                 List<Integer> scores = (List<Integer>) recipeJSON.get("scores");
                 String author = (String) recipeJSON.get("author");
                 LocalDate dateCreated = LocalDate.parse((String) recipeJSON.get("date_created"));
 
-                recipeRepository.addRecipe(new Recipe(id, ingredients, recipeSteps, scores, author, dateCreated));
+                recipeRepository.addRecipe(new Recipe(id, title, ingredients, recipeSteps, scores, author, dateCreated));
             }
 
         } catch (Exception e) {
