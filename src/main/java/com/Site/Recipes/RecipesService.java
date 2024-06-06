@@ -17,12 +17,9 @@ public class RecipesService {
     RecipeRepository recipeRepository;
 
     //Create
-    void addRecipe(Recipe recipeToAdd) {
-        if(recipeRepository.existsById(recipeToAdd.getId())) {
-            throw new RecipeIdAlreadyExistsException();
-        } else {
-            recipeRepository.save(recipeToAdd);
-        }
+    Recipe addRecipe(Recipe recipeToAdd) {
+        recipeRepository.save(recipeToAdd);
+        return recipeRepository.getRecipeById(recipeToAdd.getId());
     }
 
 
@@ -37,8 +34,30 @@ public class RecipesService {
 
     //Update
     public void updateRecipeById(Recipe recipeToUpdate, Long id) {
-        if(recipeRepository.existsById(id)) {
+        if (recipeRepository.existsById(id)) {
             recipeRepository.save(recipeToUpdate);
+        } else {
+            throw new RecipeNotFoundException();
+        }
+    }
+
+    public Recipe upvoteRecipeById(Long id) {
+        if (recipeRepository.existsById(id)) {
+            Recipe recipeToUpdate = recipeRepository.getRecipeById(id);
+            recipeToUpdate.setUpvotes(recipeToUpdate.getUpvotes() + 1);
+            updateRecipeById(recipeToUpdate, id);
+            return getRecipeById(id);
+        } else {
+            throw new RecipeNotFoundException();
+        }
+    }
+
+    public Recipe downvoteRecipeById(Long id) {
+        if (recipeRepository.existsById(id)) {
+            Recipe recipeToUpdate = recipeRepository.getRecipeById(id);
+            recipeToUpdate.setDownvotes(recipeToUpdate.getDownvotes() + 1);
+            updateRecipeById(recipeToUpdate, id);
+            return getRecipeById(id);
         } else {
             throw new RecipeNotFoundException();
         }
@@ -46,7 +65,7 @@ public class RecipesService {
 
     //Delete
     public void deleteRecipeById(Long id) {
-        if(recipeRepository.existsById(id)) {
+        if (recipeRepository.existsById(id)) {
             recipeRepository.deleteById(id);
         } else {
             throw new RecipeNotFoundException();

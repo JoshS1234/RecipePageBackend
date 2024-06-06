@@ -26,11 +26,13 @@ public class RecipesController {
         return exception.getMessage();
     }
 
+
+    //Create
     @PostMapping("/recipes")
-    void addRecipe(@RequestBody Recipe recipeToAdd) {
-        System.out.println(recipeToAdd);
-        recipesService.addRecipe(recipeToAdd);
+    Recipe addRecipe(@RequestBody Recipe recipeToAdd) {
+        return recipesService.addRecipe(recipeToAdd);
     }
+
 
     //Read
     @GetMapping("/recipes/{id}")
@@ -49,6 +51,16 @@ public class RecipesController {
     public void updateRecipe(@RequestBody Recipe recipeToUpdate, @PathVariable Long id) {
         recipeToUpdate.setId(id);
         recipesService.updateRecipeById(recipeToUpdate, id);
+    }
+
+    @PutMapping("/recipes/upvote/{id}")
+    public Recipe upvoteRecipeById(@PathVariable Long id) {
+        return recipesService.upvoteRecipeById(id);
+    }
+
+    @PutMapping("/recipes/downvote/{id}")
+    public Recipe downvoteRecipeById(@PathVariable Long id) {
+        return recipesService.downvoteRecipeById(id);
     }
 
     //Delete
